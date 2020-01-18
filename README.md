@@ -383,14 +383,6 @@ frankie.save()
 
 <details>
     <summary>Promises</summary>
-    # JavaScript Promises
-
-## Objectives
-
-* Describe the anatomy of a Promise
-* Utilize Promises to manage asynchronous operations
-* Correctly use a Promise chain
-* Handle errors while working with Promises
 
 ## Introduction
 
@@ -402,12 +394,6 @@ Welcome to the Promise land! Promises drive a lot of modern programming practice
 Read this: [Promises For Dummies](https://scotch.io/tutorials/javascript-promises-for-dummies). 
 
 If you read this yesterday, go through and read it again! What did you pick up this time that you didn't see before?
-</details>
-
-<details>
-	<summary>Think, Pair, Share</summary>
-	
-What are some examples of a Promise in the real world? What's a scenario in which you would want to 'chain' Promises together in the real world?
 </details>
 
 <!-- https://spring.io/understanding/javascript-promises -->
@@ -481,14 +467,6 @@ In all of these examples, your JavaScript code is _waiting for something to happ
 
 Even though all of this sounds new, we've already seen an alternative way to handle code that is waiting for something to happen. 
 
-
-<details>
-<summary>Think, Pair, Share</summary>
-
-Talk to the person next to you and discuss how we have handled _waiting for something to happen_ before.  Write out 2-3 examples of when and how you have done this previously.
-</details>
-
-<details>
 <summary>Previous Ways We've Dealt with Async Calls</summary>
 
 So how can we tell our code to wait for something to finish?  Node actually uses the same approach that the browser does -- callbacks.
