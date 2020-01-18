@@ -397,31 +397,6 @@ If you read this yesterday, go through and read it again! What did you pick up t
 </details>
 
 <!-- https://spring.io/understanding/javascript-promises -->
-
-## Non-Blocking Code in JavaScript
-<details>
-  <summary>Pop Quiz!</summary>
-  
-  Pop quiz! In the code below, which word will get printed first?
-
-  ```js
-  setTimeout(function(){ 
-    console.log('Red'); 
-  }, 0);
-  console.log('Blue');
-  ```
-
-  What about now? Try it out for yourself and see what happens.
-
-  ```js
-  console.log('Red');
-  console.log('Blue');
-  ```
-</details>
-
-  JavaScript code is _non-blocking_ -- this means that each line of code begins
-  to execute as soon as it possibly can, even if a previous line of code hasn't finished executing.
-  
   
 ## Synchronicity
 
