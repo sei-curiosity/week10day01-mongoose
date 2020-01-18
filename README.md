@@ -339,6 +339,18 @@ let StudentSchema = new Schema({
 let ProjectModel = mongoose.model("Project", ProjectSchema);
 let StudentModel = mongoose.model("Student", StudentSchema);
 ```
+> The **projects key** in your `StudentSchema` document, will contain a special array that has specific methods that work with embedded documents.
+>
+> The Project Schema must be defined prior to our main Student Schema.
+
+#### Advantages
+* Easy to conceptualize and set up.
+* Can be accessed quickly.
+
+#### Disadvantages
+* Do not scale well. Documents cannot exceed 16MB in size.
+
+> If you find that you are nesting documents within documents for 3+ levels, you should probably look into a relational database. Check Multiple collections (below) for more info.
 
 <details>
 	<summary>Multiple Collections & References</summary>
@@ -374,19 +386,6 @@ let ProjectModel = mongoose.model("Project", ProjectSchema);
 * Requires more work. Need to find both documents that have the references (i.e., multiple queries).
 * Not the way that Mongo was meant to be used.
 </details>
-> The **projects key** in your `StudentSchema` document, will contain a special array that has specific methods that work with embedded documents.
->
-> The Project Schema must be defined prior to our main Student Schema.
-
-#### Advantages
-* Easy to conceptualize and set up.
-* Can be accessed quickly.
-
-#### Disadvantages
-* Do not scale well. Documents cannot exceed 16MB in size.
-
-> If you find that you are nesting documents within documents for 3+ levels, you should probably look into a relational database. Scroll to the bottom for more info.
-
 <br />
 
 ### &#x1F535; YOU DO (2 minutes)
