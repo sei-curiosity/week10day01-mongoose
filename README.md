@@ -860,9 +860,6 @@ StudentModel.insertMany(students)
   .catch((error) => {
     console.log(error)
   })
-  .then(() => {
-    db.close()
-  })
 
 ```
 Now, seed your database by running `node db/seeds.js` in your terminal. Use Ctrl + C to exit running Node.
