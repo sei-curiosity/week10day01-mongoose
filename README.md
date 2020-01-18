@@ -457,7 +457,6 @@ By setting a callback as an event handler, we can defer its execution until the 
    //Do stuff when a user makes an interaction in the browser
  })
   ```
-</details>
 
 ## "Callback Hell" : Drawbacks to Callbacks
 
