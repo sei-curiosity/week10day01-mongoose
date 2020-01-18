@@ -1135,14 +1135,14 @@ module.exports = router
 
 <br />
 
-Adding the following to the `server.js` in order to access our routes 
+Adding the following to the `server.js` in order to access our routes after running `npm install express`
 
 ```js
 //in server.js
 
 const express = require('express') //import package
 const app = express() //execute the package
-const studentrouter = require('./controllers/students_controller.js')
+const studentrouter = require('./controllers/students_controller.js') //fetching the created routes in controller
 app.use('/', studentrouter) 
 app.listen(3000); //listening to port 3000 for the route calls
 
