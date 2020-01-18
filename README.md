@@ -337,6 +337,41 @@ let StudentSchema = new Schema({
 let ProjectModel = mongoose.model("Project", ProjectSchema);
 let StudentModel = mongoose.model("Student", StudentSchema);
 ```
+
+<details>
+	<summary>Multiple Collections & References</summary>
+
+Similar to how we use foreign keys to represent a one-to-many relationship in a SQL database, we can add [references](https://docs.mongodb.org/manual/tutorial/model-referenced-one-to-many-relationships-between-documents) to documents in other collections by storing an array of `ObjectIds` that references document Ids from another model.
+
+```js
+// in the db/schema.js
+
+let ProjectSchema = new Schema({
+  title: String,
+  unit: String,
+  students: [{type: Schema.ObjectId, ref: "Student"}]
+});
+
+let StudentSchema = new Schema({
+  name: String,
+  age: Number,
+  projects: [ {type: Schema.ObjectId, ref: "Project"}]
+});
+
+let StudentModel = mongoose.model("Student", StudentSchema);
+let ProjectModel = mongoose.model("Project", ProjectSchema);
+```
+
+> Since we are using an Id to refer to other objects, we use the ObjectId type in the schema definition. The `ref` attribute must match the model used in the definition.
+
+#### Advantages
+* Could offer greater flexibility when querying.
+* Might be a better decision for scaling.
+
+#### Disadvantages
+* Requires more work. Need to find both documents that have the references (i.e., multiple queries).
+* Not the way that Mongo was meant to be used.
+</details>
 > The **projects key** in your `StudentSchema` document, will contain a special array that has specific methods that work with embedded documents.
 >
 > The Project Schema must be defined prior to our main Student Schema.
@@ -804,17 +839,18 @@ ProjectModel.remove({})
 
 // Now, we will generate instances of a Student and of their Project.
 const project1 = new ProjectModel({title: "Project 1!!!", unit: "JS"})
-const project2 = new ProjectModel({title: "Project 2!!!", unit: "Express"})
-const project3 = new ProjectModel({title: "Project 3!!!", unit: "Angular"})
-const project4 = new ProjectModel({title: "Project 4!!!", unit: "Rails"})
+const project2 = new ProjectModel({title: "Project 2!!!", unit: "RAILS"})
+const project3 = new ProjectModel({title: "Project 3!!!", unit: "REACT"})
+const project4 = new ProjectModel({title: "Project 4!!!", unit: "EXPRESS"})
 
 const projects = [project1, project2, project3, project4]
 
-const becky = new StudentModel({name: "Becky" , projects: projects})
-const brandon = new StudentModel({name: "Brandon", projects: projects})
-const steve = new StudentModel({name: "Steve", projects: projects})
+const ahmed = new StudentModel({name: "Ahmed" , projects: projects})
+const maha = new StudentModel({name: "Maha", projects: projects})
+const sami = new StudentModel({name: "Sami", projects: projects})
+const salman = new StudentModel({name: "Salman", projects: projects})
 
-const students = [becky, brandon, steve];
+const students = [ahmed, maha, sami, salman];
 
 StudentModel.insertMany(students)
   .then(() => {
@@ -1206,7 +1242,7 @@ let StudentSchema = new Schema({
 
 ## Homework
 
-After this class you should be able to complete Part I of [YUM](https://github.com/instructors-sei-curiosity/hw-week10day01-02-mongoose-express).
+After this class you should be able to complete Part I of [YUM](https://github.com/sei-curiosity/hw-week10day01-02-03-mongoose-express).
 
 ## Additional Resources
 
@@ -1216,36 +1252,3 @@ After this class you should be able to complete Part I of [YUM](https://github.c
 * [ODM For Mongo and Rails](https://github.com/mongodb/mongoid)
 
 <br />
-
-### Multiple Collections & References
-
-Similar to how we use foreign keys to represent a one-to-many relationship in a SQL database, we can add [references](https://docs.mongodb.org/manual/tutorial/model-referenced-one-to-many-relationships-between-documents) to documents in other collections by storing an array of `ObjectIds` that references document Ids from another model.
-
-```js
-// in the db/schema.js
-
-let ProjectSchema = new Schema({
-  title: String,
-  unit: String,
-  students: [{type: Schema.ObjectId, ref: "Student"}]
-});
-
-let StudentSchema = new Schema({
-  name: String,
-  age: Number,
-  projects: [ {type: Schema.ObjectId, ref: "Project"}]
-});
-
-let StudentModel = mongoose.model("Student", StudentSchema);
-let ProjectModel = mongoose.model("Project", ProjectSchema);
-```
-
-> Since we are using an Id to refer to other objects, we use the ObjectId type in the schema definition. The `ref` attribute must match the model used in the definition.
-
-#### Advantages
-* Could offer greater flexibility when querying.
-* Might be a better decision for scaling.
-
-#### Disadvantages
-* Requires more work. Need to find both documents that have the references (i.e., multiple queries).
-* Not the way that Mongo was meant to be used.
