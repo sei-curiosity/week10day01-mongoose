@@ -1137,7 +1137,7 @@ module.exports = router
 
 Adding the following to the `server.js` in order to access our routes 
 
-```
+```js
 //in server.js
 
 const express = require('express') //import package
