@@ -382,7 +382,7 @@ frankie.save()
 > Wait, what is this `.then` and `.catch` thing all about?  This is called a Promise!  Let's take a few minutes to explore what this is:
 
 <details>
-    <summary>Promises</summary>
+	<summary>--Promises Explained--</summary>
 
 ## Introduction
 
