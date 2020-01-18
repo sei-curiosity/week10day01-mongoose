@@ -937,10 +937,10 @@ const Schema = require("../db/schema.js")
 const StudentModel = Schema.StudentModel
 const ProjectModel = Schema.ProjectModel
 
-router.get('/', (request, response) => {
+router.get('/students', (request, response) => {
   StudentModel.find({})
     .then((students) => {
-      response.render('students/index', { 
+      response.render({  
         students: students
       })
     })
@@ -966,10 +966,10 @@ const Schema = require("../db/schema.js")
 const StudentModel = Schema.StudentModel
 const ProjectModel = Schema.ProjectModel
 
-router.get('/', (request, response) => {
+router.get('/students', (request, response) => {
   StudentModel.find({})
     .then((students) => {
-      response.send('students/index', { 
+      response.send({ 
         students: students
       })
     })
@@ -978,12 +978,12 @@ router.get('/', (request, response) => {
     })
 })
 
-router.get('/:studentId', (request, response) => {
+router.get('/students/:studentId', (request, response) => {
   const studentId = request.params.studentId
 
   StudentModel.findById(studentId)
     .then((student) => {
-      response.render('students/show', {
+      response.send({
         student: student
       })
     })
@@ -1021,10 +1021,10 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
   const StudentModel = Schema.StudentModel
   const ProjectModel = Schema.ProjectModel
 
-  router.get('/', (request, response) => {
+  router.get('/students', (request, response) => {
     StudentModel.find({})
       .then((students) => {
-        response.send('students/index', { 
+        response.send({ 
           students: students
         })
       })
@@ -1033,18 +1033,18 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
       })
   })
 
-  router.get('/:studentId', (request, response) => {
+  router.get('/students/:studentId', (request, response) => {
     const studentId = request.params.studentId
 
     StudentModel.findById(studentId)
       .then((student) => {
-        response.render('students/show', {
+        response.send({
           student: student
         })
       })
   })
 
-  router.put('/:studentId', (request, response) => {
+  router.put('students/:studentId', (request, response) => {
     const studentId = request.params.studentId
     const updatedStudent = request.body
 
@@ -1072,68 +1072,85 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
   ```js
   // in the controllers/students_controller.js
 
-  const express = require('express')
-  const router = express.Router()
+const express = require('express')
+const router = express.Router()
 
-  const Schema = require("../db/schema.js")
-  const StudentModel = Schema.StudentModel
-  const ProjectModel = Schema.ProjectModel
+const Schema = require("../db/schema.js")
+const StudentModel = Schema.StudentModel
+const ProjectModel = Schema.ProjectModel
 
-  router.get('/', (request, response) => {
-    StudentModel.find({})
-      .then((students) => {
-        response.send('students/index', { 
-          students: students
-        })
+router.get('/students', (request, response) => {
+  StudentModel.find({})
+    .then((students) => {
+      response.send({ 
+        students: students
       })
-      .catch((error) => {
-        console.log(error)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
+
+router.get('/students/:studentId', (request, response) => {
+  const studentId = request.params.studentId
+
+  StudentModel.findById(studentId)
+    .then((student) => {
+      response.send({
+        student: student
       })
-  })
+    })
+})
 
-  router.get('/:studentId', (request, response) => {
-    const studentId = request.params.studentId
+router.put('/students/:studentId', (request, response) => {
+  const studentId = request.params.studentId
+  const updatedStudent = request.body
 
-    StudentModel.findById(studentId)
-      .then((student) => {
-        response.render('students/show', {
-          student: student
-        })
-      })
-  })
+  StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true})
+    .then((student) => {
+      response.redirect(`/students/${studentId}`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 
-  router.put('/:studentId', (request, response) => {
-    const studentId = request.params.studentId
-    const updatedStudent = request.body
+router.delete('/students/:studentId', (request, response) => {
+  const studentId = request.params.studentId
 
-    StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true})
-      .then((student) => {
-        response.redirect(`/students/${studentId}`)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
+  StudentModel.findByIdAndRemove(studentId)
+    .then(() => {
+      response.redirect('/students')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 
-  router.delete('/:studentId', (request, response) => {
-    const studentId = request.params.studentId
-
-    StudentModel.findByIdAndRemove(studentId)
-      .then(() => {
-        response.redirect('/students')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
-
-  module.exports = router
+module.exports = router
 
   ```
 
 </details>
 
 <br />
+
+Adding the following to the `server.js` in order to access our routes 
+
+```
+//in server.js
+
+const express = require('express') //import package
+const app = express() //execute the package
+const studentrouter = require('./controllers/students_controller.js')
+app.use('/', studentrouter) 
+app.listen(3000); //listening to port 3000 for the route calls
+
+```
+
+Once done we can start the node server using `node server.js`
+
+Lets use [Postman](https://www.getpostman.com/downloads/) to review our requests
 
 
 ## Validations (Bonus)
