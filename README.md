@@ -658,9 +658,7 @@ What are some scenarios where you imagine an Error may occur when fetching infor
 <summary>Promises Example</summary>
 
 A promise is like an IOU in real life. When you go to a restaurant, you pay money and in return are _promised_ food in the near future.  When you put in your order there can be plenty of orders being worked on at once.  Each order gets delivered as soon as it is finished, and it is delivered for you to eat.  Additionally, there is a possibility that something goes wrong.  Your food is overcooked, your order gets lost, etc.  When something goes wrong, the restaurant will explicitly let you know (hopefully).
-</details>
-
-## I DO: 
+</details> 
 
 <details>
 <Summary>Using Promises to fetch data from an API</summary>
@@ -731,15 +729,6 @@ Notice that we only have one `.catch` block at the end.  This is another great f
 - Promises have 3 states. Pending, Resolved, and Rejected
 - We will be consuming Promise objects when we interact with our MongoDB database and when we make API calls to a server.
 
-## Independent Practice
-[Promises Lab - Promise Burger](https://git.generalassemb.ly/atl-wdi/wdi-curriculum/tree/master/labs/javaScript/promise-burger)
-<br>
-## For more info on how to build a Promise object
-<details>
-<summary>(Only if you feel really cozy with consuming promises)</summary>
-
-  - [Promises In The Wild](https://davidwalsh.name/promises)
-  - [Building Promises Lab](https://git.generalassemb.ly/atl-wdi/wdi-curriculum/tree/master/labs/javaScript/promises/js-promises-lab-starter)
 </details>
 
 Run `node db/schema.js` in the Terminal to run it. We can also consolidate this code into a single `.create` method, like so...
