@@ -1049,7 +1049,7 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
     const studentId = request.params.studentId
     const updatedStudent = request.body
 
-    StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true})
+    StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true}) //new is optional read below for description (older version mongoDB)
       .then((student) => {
         console.log(`${student.name} updated!`)
       })
@@ -1062,7 +1062,7 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
 
   ```
 
-  > **Important:** We are inserting {new: true} as an additional option. If we do not, we will get the old document as the return value -- not the updated one.
+  > (Applies to older Versions of MongoDB) **Important:** We are inserting {new: true} as an additional option. If we do not, we will get the old document as the return value -- not the updated one.
 
 </details>
 
