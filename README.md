@@ -1135,16 +1135,18 @@ module.exports = router
 
 <br />
 
-Adding the following to the `server.js` in order to access our routes after running `npm install express`
+Adding the following to the `server.js` in order to access our routes after running `npm install express body-parser --save`
 
 ```js
 //in server.js
 
 const express = require('express') //import package
 const app = express() //execute the package
-const studentrouter = require('./controllers/students_controller.js') //fetching the created routes in controller
-app.use('/', studentrouter) 
-app.listen(3000); //listening to port 3000 for the route calls
+const bodyParser = require('body-parser') //used to parse the request body in JSON format
+app.use(bodyParser.json()) //using the bodyparser in our application
+const studentrouter = require('./controllers/students_controller.js') //importing our router
+app.use('/', studentrouter) //using our router
+app.listen(3000); // listening to post 3000 for incoming requests
 
 ```
 
