@@ -202,7 +202,8 @@ The name above `students` will be the name of the app's Mongo database. A cool f
 // in the db/schema.js
 
 let mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/students');
+mongoose.connect('mongodb://localhost/students' , { useNewUrlParser: true , useUnifiedTopology: true, 
+useFindAndModify: false, useCreateIndex: true })
 
 // Now that we are connected, let's save that connection to the database in a letiable. We are just doing this to keep our code DRY.
 let db = mongoose.connection;
