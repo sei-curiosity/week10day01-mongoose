@@ -1045,18 +1045,18 @@ Then use the [Mongoose documentation](http://mongoosejs.com/docs/api.html#query-
       })
   })
 
-  router.put('students/:studentId', (request, response) => {
-    const studentId = request.params.studentId
-    const updatedStudent = request.body
 
-    StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true}) //new is optional read below for description (older version mongoDB)
-      .then((student) => {
-        console.log(`${student.name} updated!`)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  })
+router.put('/students/:studentId', (request, response) => {
+  const studentId = request.params.studentId
+  const updatedStudent = request.body
+  StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true})
+    .then((student) => {
+      response.redirect(`/students/${student._id}`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
 
   module.exports = router
 
@@ -1109,7 +1109,7 @@ router.put('/students/:studentId', (request, response) => {
 
   StudentModel.findByIdAndUpdate(studentId, updatedStudent, {new: true})
     .then((student) => {
-      response.redirect(`/students/${studentId}`)
+      response.redirect(`/students/${student._id}`)
     })
     .catch((error) => {
       console.log(error)
